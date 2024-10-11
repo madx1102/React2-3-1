@@ -32,7 +32,39 @@ page Project에서 사용하던 \_app.jsx 와 \_document.jsx를 대체
 
 metadata에서 모든 페이지에 적용할 meta data를 선언 할 수 있다  
 title의 경우에는 각 페이지에 맞게 작성하는 것이 SEO에 좋다  
-이럴 경우 각각의 page.jsx에 코드를 추가하면 된다
+이럴 경우 각각의 page.jsx에 코드를 추가하면 된다  
+추가하지 않은 페이지는 layout.jsx에서 정의한 title이 적용됨  
+title 값이 없으면 default 값이 적용된다
+
+### RootLayout
+
+Children prop은 각각의 page.jsx를 받아온다
+특정 페이지나 페이지 그룹에 레이아웃을 추가하고 싶다면 해당 디렉토리에
+layout.jsx 를 추가하면 된다
+
+### Link vs. a vs. router.push
+
+Link component를 이용해 Navibar componen를 만들어 본다
+<a> tag는 html 동기식으로 전체가 reload 되기 때문에 외부 링크 시 사용  
+일반적으로 내부 링크 이동시에는 사용하지 않음
+
+router.push는 빌드 후 이동할 주소가 html상에 노출되지 않기 때문에 SEO에 취약함  
+Link 컴포넌트는 빌드 후 <a> tag로 자동 변환됨  
+<a> tag의 장점인 SEO 최적화 prefetch 가능 우클릭 기능 등을 갖춤  
+내부 페이지로의 이동 시 이 방식을 사용해야 SPA 방식으로 전체 html 중 필요한 부분만 비동기식으로 리렌더링 됨  
+따라서 특별한 경우가 아니면 Link 컴포넌트 사용을 권장
+
+### 이미지 컴포넌트 - local
+
+정적 자원 중 이미지 파일은 SEO에 많은 영향을 줌  
+다운로드 시간이 많이 걸릴고 렌더링 이후 레이아웃이 변경되는 등 UX에 영향을 줌  
+이것을 누적 레이아웃 이동(CLS)이라고 한다  
+이미지 컴포넌트를 사용하면 CLS 문제를 해결한다  
+lazy loading: 이미지 로드 시점을 필요할 때 까지 지연시키는 기술  
+이미지 사이즈 최적화로 사이즈를 10분의 1이하로 줄여준다  
+Placeholder를 제공  
+WebP와 같은 최신 이미지 포맷 및 최신 포맷을 지원하지 않는 브라우저를 위해 png나 jpge 등과 같은 예전 이미지 포멧도 제공  
+Pixabay나 Unplash와 같은 외부 이미지 서비스도 이미지를 제공 할 수 있음
 
 # 10/2 수업내용
 
