@@ -9,6 +9,31 @@ npm i -g create-react-app
 https://github.com/hanbit/practical-next.js  
 예제 코드
 
+# 10/11 수업내용
+
+시험 전주다 초 비 상!!!!
+
+## 메모 할만한 것
+
+### \_document
+
+app.jsx 다음에 실행됨  
+각 펭지ㅣ에서 공통적으로 사용될 html head body 안에 들어갈 내용을 선언  
+이벤트나 css는 이 곳에서 선언하지 않음  
+로직이나 스타일이 필요하면 \_app.jsx에서 선언해야함
+
+### \_layout
+
+app 디렉토리 아래에 위치  
+page Project에서 사용하던 \_app.jsx 와 \_document.jsx를 대체
+이 파일은 삭제해도 프로젝트를 실행하면 자동 생성됨
+
+### meta data
+
+metadata에서 모든 페이지에 적용할 meta data를 선언 할 수 있다  
+title의 경우에는 각 페이지에 맞게 작성하는 것이 SEO에 좋다  
+이럴 경우 각각의 page.jsx에 코드를 추가하면 된다
+
 # 10/2 수업내용
 
 ## 메모 할만한 것
