@@ -9,6 +9,94 @@ npm i -g create-react-app
 https://github.com/hanbit/practical-next.js  
 예제 코드
 
+# 10/23 수업내용
+
+정적 자원을 public에 저장하기 때문에
+이미지 폴더를 퍼블릭에 넣고 관리
+
+# 10/11 수업내용 + 10/23 수업내용
+
+시험 전주다 초 비 상!!!!
+
+## 메모 할만한 것
+
+### \_document
+
+app.jsx 다음에 실행됨  
+각 펭지ㅣ에서 공통적으로 사용될 html head body 안에 들어갈 내용을 선언  
+이벤트나 css는 이 곳에서 선언하지 않음  
+로직이나 스타일이 필요하면 \_app.jsx에서 선언해야함
+
+### \_layout
+
+app 디렉토리 아래에 위치  
+page Project에서 사용하던 \_app.jsx 와 \_document.jsx를 대체
+이 파일은 삭제해도 프로젝트를 실행하면 자동 생성됨
+
+### meta data
+
+metadata에서 모든 페이지에 적용할 meta data를 선언 할 수 있다  
+title의 경우에는 각 페이지에 맞게 작성하는 것이 SEO에 좋다  
+이럴 경우 각각의 page.jsx에 코드를 추가하면 된다  
+추가하지 않은 페이지는 layout.jsx에서 정의한 title이 적용됨  
+title 값이 없으면 default 값이 적용된다
+
+### RootLayout
+
+Children prop은 각각의 page.jsx를 받아온다
+특정 페이지나 페이지 그룹에 레이아웃을 추가하고 싶다면 해당 디렉토리에
+layout.jsx 를 추가하면 된다
+
+### Link vs. a vs. router.push
+
+Link component를 이용해 Navibar componen를 만들어 본다
+tag는 html 동기식으로 전체가 reload 되기 때문에 외부 링크 시 사용  
+일반적으로 내부 링크 이동시에는 사용하지 않음
+
+router.push는 빌드 후 이동할 주소가 html상에 노출되지 않기 때문에 SEO에 취약함  
+Link 컴포넌트는 빌드 후 tag로 자동 변환됨  
+ tag의 장점인 SEO 최적화 prefetch 가능 우클릭 기능 등을 갖춤  
+내부 페이지로의 이동 시 이 방식을 사용해야 SPA 방식으로 전체 html 중 필요한 부분만 비동기식으로 리렌더링 됨  
+따라서 특별한 경우가 아니면 Link 컴포넌트 사용을 권장
+
+### Static Resource
+
+정적 자원 중 이미지 파일은 SEO에 많은 영향을 줌  
+다운로드 시간이 많이 걸릴고 렌더링 이후 레이아웃이 변경되는 등 UX에 영향을 줌  
+이것을 누적 레이아웃 이동(CLS)이라고 한다  
+이미지 컴포넌트를 사용하면 CLS 문제를 해결한다  
+lazy loading: 이미지 로드 시점을 필요할 때 까지 지연시키는 기술  
+이미지 사이즈 최적화로 사이즈를 10분의 1이하로 줄여준다  
+Placeholder를 제공  
+WebP와 같은 최신 이미지 포맷 및 최신 포맷을 지원하지 않는 브라우저를 위해 png나 jpge 등과 같은 예전 이미지 포멧도 제공  
+Pixabay나 Unplash와 같은 외부 이미지 서비스도 이미지를 제공 할 수 있음
+
+### 이미지 컴포넌트 - Static Resource
+
+이미지를 임포트한 뒤에 이름만 사용하면 된다  
+임포트 경로에는 /퍼블릭을 반드시 넣어줘야 한다
+같은 이미지를 같은 페이지에서 여러 번 사용할 때 편하다
+
+정적 자원은 기본적으로 퍼블릭 디렉토리에 저장  
+정적 자원은 번들링 이후에도 변하지 않기 때문  
+여러 종류의 정적 자원을 사용할 경우 퍼블릭의 루트에 각각 디렉토리를 만들어 사용한다
+
+### 이미지 컴포넌트 - Remote
+
+Pixabay와 같은 외부 이미지를 사용하려면 next.config.mjs에 URL을 추가해야 한다  
+만일 파일이 없다면 Project root에 추가하면 된다
+
+![견본](https://github.com/user-attachments/assets/13d4e3c8-bf43-4616-95b8-270d2fa4b301)
+
+
+# 10/2 수업내용
+
+## 메모 할만한 것
+
+일단 교재 참고하면서 진도 나간거 만큼 복구  
+첫 설정 할 때 오류 터지는거 복구하느라 초기 설정을 모른다
+예제 코드 + 교재를 보고 복구하기
+
 # 9/25 수업내용
 
 일단 코드만 정리해놓고 나중에 앱 라우터로 생성해서 옮겨놓기  
@@ -59,11 +147,13 @@ SWC는 Rust로 작성되어 바벨에 비해 속도가 매우 빠르다
 ## SWC를 프로젝트에 적용하려면
 
 새로운 프로젝트에 적용하는 것은 다음 명령으로 생성하면 바로 사용 가능
-$ npx crate-next-app@latest  
+$ /npx create-next-app@latest  
 or  
-$ npx crate-next-app@12  
+$ npx create-next-app@12
 next 12 이전 버전의 프로젝트에 적용하려면 다음과 같이 업그레이드 해야 함  
 $ npm install next@12 (그리 추천하지는 않음)
+
+$npm run dev 실행
 
 ## 렌더링 전략
 
@@ -140,3 +230,4 @@ SSG는 높은 확장성과 뛰어난 성능을 보이는 프런듵엔드 애플�
 동적 컨텐츠를 제공할 때 로딩하는데 시간이 오래 걸린다면, SSG ISR을 함께 사용하면 문제를 해결 할 수 있다  
 많은 양의 데이터를 필요로 하는 복잡한 대시보드를 만든다면, 데이터를 불러오기 위한 RESTAPI 호출에 수 초가 소요됨  
 데이터가 자주 변하지 않는다면 SSG와 ISR을 사용해 데이터를 10분동안 캐싱할 수 있다
+
